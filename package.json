@@ -1,0 +1,17 @@
+{
+  "name": "mapbox-gl-topojson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify site.js > dist/bundle.js"
+  },
+  "keywords": [],
+  "author": "Anand Thakker <vestibule@anandthakker.net> (http://anandthakker.net/)",
+  "license": "ISC",
+  "dependencies": {
+    "mapbox-gl": "github:anandthakker/mapbox-gl-js#717a9b3d5baf1600e961d3ce30358655baaea16e",
+    "topojson": "^1.6.26",
+    "webworkify": "^1.2.1"
+  }
+}
