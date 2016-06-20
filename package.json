@@ -10,7 +10,7 @@
   "author": "Anand Thakker <vestibule@anandthakker.net> (http://anandthakker.net/)",
   "license": "ISC",
   "dependencies": {
-    "mapbox-gl": "github:anandthakker/mapbox-gl-js#717a9b3d5baf1600e961d3ce30358655baaea16e",
+    "mapbox-gl": "mapbox/mapbox-gl-js#c1376ceadccdc521d1c82d61d4e07317d5472638",
     "topojson": "^1.6.26",
     "webworkify": "^1.2.1"
   }

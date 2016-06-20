@@ -1,19 +1,17 @@
 var mapboxgl = require('mapbox-gl')
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGV2c2VlZCIsImEiOiJjaW4wOW1taTkwN3c5d2tsdXg3aXRrMjZhIn0.QpBLQwr3XzYs6xh6b8hbcQ'
-var TopojsonSource = require('./topojson_source')
 
 var map = window.map = new mapboxgl.Map({
     container: 'map',
     zoom: 5.2,
     center: [-119.393, 36.883],
-    style: 'mapbox://styles/mapbox/streets-v8',
-    hash: true
+    style: 'mapbox://styles/mapbox/streets-v8'
 });
 
 map.addControl(new mapboxgl.Navigation());
 
 map.on('load', function() {
-  map.style.addSourceType('topojson', TopojsonSource, function () {
+  map.style.addSourceType('topojson', require('./topojson_source'), function () {
     map.addSource('counties', {
         type: 'topojson',
         data: 'ca.json',
@@ -41,6 +39,5 @@ map.on('load', function() {
             }
         }
     }, 'country-label-lg');
-
   })
 })

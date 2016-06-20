@@ -1,11 +1,11 @@
-var GeojsonSource = require('mapbox-gl/js/source/geojson_source')
+var GeoJSONSource = require('mapbox-gl/js/source/geojson_source')
 var webworkify = require('webworkify')
 
-module.exports = TopojsonSource
-module.exports.worker = URL.createObjectURL(webworkify(require('./topojson_worker.js'), {bare: true}));
+module.exports.create = function (id, options, dispatcher) {
+    // make sure the `layer` property gets passed on to the WorkerSource
+    options = Object.assign({ workerOptions: { layer: options.layer } }, options)
+    return GeoJSONSource.create(id, options, dispatcher);
+};
 
-function TopojsonSource (options) {
-  GeojsonSource.call(this, options)
-}
-TopojsonSource.prototype = Object.create(GeojsonSource.prototype)
+module.exports.workerSourceURL = URL.createObjectURL(webworkify(require('./topojson_worker.js'), {bare: true}));
 
