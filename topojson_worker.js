@@ -1,7 +1,6 @@
 var util = require('mapbox-gl/js/util/util')
 var topojson = require('topojson')
 var GeoJSONWorkerSource = require('mapbox-gl/js/source/geojson_worker_source')
-var ajax = require('mapbox-gl/js/util/ajax')
 
 function loadGeoJSON (params, callback) {
   // defer to the default implementation to grab / JSON.parse the data, which
@@ -9,19 +8,18 @@ function loadGeoJSON (params, callback) {
   GeoJSONWorkerSource.prototype.loadGeoJSON.call(this, params, function (err, topo) {
     if (err) { return callback(err) }
     // once we have it, convert the layer specified in `params` to geojson.
-    var data =  topojson.feature(topo, topo.objects[params.layer])
+    var data = topojson.feature(topo, topo.objects[params.layer])
     console.log('data', data, params, topo)
     callback(null, data)
   })
 }
 
 function TopoJSONWorkerSource (actor, style) {
-  debugger
-  GeoJSONWorkerSource.call(this, actor, style, loadGeoJSON);
+  GeoJSONWorkerSource.call(this, actor, style, loadGeoJSON)
 }
 
-TopoJSONWorkerSource.prototype = util.inherit(GeoJSONWorkerSource);
+TopoJSONWorkerSource.prototype = util.inherit(GeoJSONWorkerSource)
 
 module.exports = function (self) {
-  self.registerWorkerSource('topojson', TopoJSONWorkerSource);
-};
+  self.registerWorkerSource('topojson', TopoJSONWorkerSource)
+}
