@@ -2,15 +2,15 @@
   "name": "mapbox-gl-topojson",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "topojson_source.js",
   "scripts": {
-    "build": "browserify site.js > dist/bundle.js"
+    "build-demo": "browserify -s mapboxgl mapbox-gl.js > dist/mapbox-gl.js",
+    "build": "browserify -s mapboxgl.TopoJSONSource topojson_source.js > dist/mapbox-gl-topojson.js"
   },
   "keywords": [],
   "author": "Anand Thakker <vestibule@anandthakker.net> (http://anandthakker.net/)",
   "license": "ISC",
   "dependencies": {
-    "mapbox-gl": "mapbox/mapbox-gl-js#92dac0683717ee9810981dc4fb4dde937e5296ab",
     "topojson": "^1.6.26",
     "webworkify": "^1.2.1"
   },
@@ -18,6 +18,10 @@
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
+    "mapbox-gl": "github:mapbox/mapbox-gl-js#fix-add-source-type",
     "eslint-plugin-standard": "^2.0.0"
+  },
+  "peerDependencies": {
+    "mapbox-gl": "0.22.1"
   }
 }

@@ -4,7 +4,9 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='dist/mapbox-gl.js'></script>
+    <script src='dist/mapbox-gl-topojson.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.22.1/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -13,7 +15,67 @@
 <body>
 
 <div id='map'></div>
-<script src='dist/bundle.js'></script>
+<script>
+mapboxgl.accessToken = getAccessToken()
+
+mapboxgl.Source.addType('topojson', mapboxgl.TopoJSONSource)
+
+var map = window.map = new mapboxgl.Map({
+  container: 'map',
+  zoom: 5.2,
+  center: [-119.393, 36.883],
+  style: 'mapbox://styles/mapbox/streets-v8'
+})
+
+map.addControl(new mapboxgl.Navigation())
+
+map.on('load', function () {
+  map.addSource('counties', {
+    type: 'topojson',
+    data: 'ca.json',
+    workerOptions: {
+      layer: 'counties'
+    }
+  })
+
+  map.addLayer({
+    'id': 'county-boundaries',
+    'type': 'line',
+    'source': 'counties',
+    'paint': {
+      'line-color': '#EC8D8D',
+      'line-width': {
+        'base': 1.5,
+        'stops': [
+          [
+            5,
+            0.75
+          ],
+          [
+            18,
+            32
+          ]
+        ]
+      }
+    }
+  }, 'country-label-lg')
+})
+
+function getAccessToken () {
+  var accessToken = (
+        getURLParameter('access_token') ||
+        localStorage.getItem('accessToken')
+    )
+  localStorage.setItem('accessToken', accessToken)
+  return accessToken
+}
+
+function getURLParameter (name) {
+  var regexp = new RegExp('[?&]' + name + '=([^&#]*)', 'i')
+  var output = regexp.exec(window.location.href)
+  return output && output[1]
+}
+</script>
 
 </body>
 </html>
