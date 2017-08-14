@@ -11,17 +11,15 @@
   "author": "Anand Thakker <vestibule@anandthakker.net> (http://anandthakker.net/)",
   "license": "ISC",
   "dependencies": {
+    "mapbox-gl": "^0.39.1",
     "topojson": "^1.6.26",
     "webworkify": "^1.2.1"
   },
   "devDependencies": {
+    "browserify": "^14.4.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
-    "mapbox-gl": "github:mapbox/mapbox-gl-js#fix-add-source-type",
     "eslint-plugin-standard": "^2.0.0"
-  },
-  "peerDependencies": {
-    "mapbox-gl": "0.22.1"
   }
 }
